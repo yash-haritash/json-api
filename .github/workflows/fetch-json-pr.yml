@@ -16,18 +16,21 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Fetch JSON Data with curl
-        run: |
-          mkdir -p data
-          curl --insecure -o data/data.json https://jsonkeeper.com/b/XP9J
+      - name: Fetch JSON Data
+        id: fetch-json
+        uses: engahmeds3ed/create-json-url@v0.0.1
+        with:
+          name: 'data.json'
+          url: 'https://gist.githubusercontent.com/yash-haritash/2ac9fa6bbf9025b2213f8eb0f01e40b1/raw/data.json'
+          dir: 'data'
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: 'Update JSON data from jsonkeeper.com'
+          commit-message: 'Update JSON data from GitHub Gist'
           title: 'Automated JSON Data Update'
-          body: 'This PR updates the JSON data fetched from https://jsonkeeper.com/b/XP9J.'
+          body: 'This PR updates the JSON data fetched from GitHub Gist.'
           branch: 'auto-update/json-data'
           base: 'main'
           labels: 'automated, data-update'
