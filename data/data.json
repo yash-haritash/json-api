@@ -1,3 +1,15 @@
 {
-  name : 'yash'
+  "timestamp": "2025-06-06T09:00:00Z",
+  "status": "active",
+  "version": 1,
+  "users": [
+    {
+      "id": 1,
+      "name": "Alice"
+    },
+    {
+      "id": 2,
+      "name": "Bob"
+    }
+  ]
 }
