@@ -33,5 +33,4 @@ jobs:
           body: 'This PR updates the JSON data fetched from GitHub Gist.'
           branch: 'auto-update/json-data'
           base: 'main'
-          labels: 'automated, data-update'
           delete-branch: true
