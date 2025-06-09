@@ -7,8 +7,8 @@ on:
         description: 'Public URL of JSON file'
         required: true
         type: string
-      filename:
-        description: 'Filename (e.g., interface-id.json)'
+      name:
+        description: 'Filename without extension (e.g., ua-platform)'
         required: true
         type: string
 
@@ -28,15 +28,15 @@ jobs:
       - name: Download JSON from URL
         run: |
           mkdir -p configs/entity/objects/interfaces
-          curl -s "${{ github.event.inputs.url }}" -o "configs/entity/objects/interfaces/${{ github.event.inputs.filename }}"
+          curl -s "${{ github.event.inputs.url }}" -o "configs/entity/objects/interfaces/${{ github.event.inputs.name }}.json"
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "Update: configs/entity/objects/interfaces/${{ github.event.inputs.filename }}"
-          title: "Automated Update: ${{ github.event.inputs.filename }}"
-          body: "This PR updates: configs/entity/objects/interfaces/${{ github.event.inputs.filename }}"
+          commit-message: "Update: configs/entity/objects/interfaces/${{ github.event.inputs.name }}.json"
+          title: "Automated Update: ${{ github.event.inputs.name }}.json"
+          body: "This PR updates: configs/entity/objects/interfaces/${{ github.event.inputs.name }}.json"
           branch: "auto-update/json-${{ github.run_id }}"
           base: "main"
           delete-branch: true
